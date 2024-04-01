@@ -6,6 +6,8 @@ import java.util.Scanner;
 import tabuleiro.ExcecaoTabuleiro;
 import xadrez.ExcecaoXadrez;
 import xadrez.PartidaXadrez;
+import xadrez.PecaXadrez;
+import xadrez.PosicaoXadrez;
 
 public class Programa {
 
@@ -16,8 +18,19 @@ public class Programa {
 
 		PartidaXadrez partidaXadrez = new PartidaXadrez();
 
-		UI.imprimirTabuleiro(partidaXadrez.getPecas());
-		sc.close();
+		while (true) {
+			UI.imprimirTabuleiro(partidaXadrez.getPecas());
+			System.out.println();
+			System.out.print("Origem: ");
+			PosicaoXadrez origem = UI.lerPosicaoXadrez(sc);
+
+			System.out.println();
+			System.out.print("Alvo: ");
+			PosicaoXadrez alvo = UI.lerPosicaoXadrez(sc);
+
+			PecaXadrez capturarPeca = partidaXadrez.executarMovimentoXadrez(origem, alvo);
+		}
+
 	}
 
 }
