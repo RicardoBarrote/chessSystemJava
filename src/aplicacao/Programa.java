@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
-import tabuleiro.ExcecaoTabuleiro;
 import xadrez.ExcecaoXadrez;
 import xadrez.PartidaXadrez;
 import xadrez.PecaXadrez;
@@ -12,7 +11,7 @@ import xadrez.PosicaoXadrez;
 
 public class Programa {
 
-	public static void main(String[] args) throws ExcecaoTabuleiro {
+	public static void main(String[] args)  {
 
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
@@ -27,9 +26,9 @@ public class Programa {
 				System.out.print("Origem: ");
 				PosicaoXadrez origem = UI.lerPosicaoXadrez(sc);
 
-				boolean[][] possivelMovimento = partidaXadrez.possivelMovimento(origem);
+				boolean[][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(origem); 
 				UI.limparTela();
-				UI.imprimirTabuleiro(partidaXadrez.getPecas(), possivelMovimento);
+				UI.imprimirTabuleiro(partidaXadrez.getPecas(), movimentosPossiveis);
 
 				System.out.println();
 				System.out.print("Alvo: ");
@@ -38,10 +37,6 @@ public class Programa {
 				PecaXadrez capturarPeca = partidaXadrez.executarMovimentoXadrez(origem, alvo);
 			} 
 			catch (ExcecaoXadrez e) {
-				System.out.println(e.getMessage());
-				sc.nextLine();
-			}
-			catch (ExcecaoTabuleiro e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
 			}

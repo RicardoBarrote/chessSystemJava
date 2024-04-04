@@ -17,16 +17,16 @@ public abstract class Pecas {
 		return tabuleiro;
 	}
 
-	public abstract boolean[][] movimentosPossiveis() throws ExcecaoTabuleiro;
-	
-	public boolean movimentoPossivel (Posicao posicao) throws ExcecaoTabuleiro {
-		return movimentosPossiveis()[posicao.getLinha()][posicao.getColuna()]; 
+	public abstract boolean[][] movimentosPossiveis();
+
+	public boolean movimentoPossivel(Posicao posicao) {
+		return movimentosPossiveis()[posicao.getLinha()][posicao.getColuna()];
 	}
 
-	public boolean existeMovimentoPossivel () throws ExcecaoTabuleiro {
-		boolean [][] mat = movimentosPossiveis();
+	public boolean existeMovimentoPossivel() {
+		boolean[][] mat = movimentosPossiveis();
 		for (int i = 0; i < mat.length; i++) {
-			for (int j = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat.length; j++) {
 				if (mat[i][j]) {
 					return true;
 				}
