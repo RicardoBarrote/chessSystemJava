@@ -51,17 +51,24 @@ public class UI {
 			throw new InputMismatchException("Erro ao ler posicao de xadrez. Valores válidos são de a1 até h8");
 		}
 	}
-	
-	public static void imprimirPartida (PartidaXadrez partidaXadrez, List <PecaXadrez> capturar) {
+
+	public static void imprimirPartida(PartidaXadrez partidaXadrez, List<PecaXadrez> capturar) {
 		imprimirTabuleiro(partidaXadrez.getPecas());
 		System.out.println();
 		imprimirPecaCapturada(capturar);
 		System.out.println();
 		System.out.println("Turno: " + partidaXadrez.getTurno());
-		System.out.println("Aguardando o jogador: " + partidaXadrez.getJogadorAtual());
-		if (partidaXadrez.getCheck()) {
-			System.out.println("CHECK!");
+		if (!partidaXadrez.getCheckMate()) {
+			System.out.println("Aguardando o jogador: " + partidaXadrez.getJogadorAtual());
+			if (partidaXadrez.getCheck()) {
+				System.out.println("CHECK!");
+			}
 		}
+		else {
+			System.out.println("CHECKMATE!");
+			System.out.println("vencedor: " + partidaXadrez.getJogadorAtual());
+		}
+
 	}
 
 	public static void imprimirTabuleiro(PecaXadrez[][] pecas) {
@@ -92,19 +99,23 @@ public class UI {
 		}
 		if (pecas == null) {
 			System.out.print("-" + ANSI_RESET);
-		} else {
+		} 
+		else {
 			if (pecas.getCor() == Cor.WHITE) {
 				System.out.print(ANSI_WHITE + pecas + ANSI_RESET);
-			} else {
+			} 
+			else {
 				System.out.print(ANSI_YELLOW + pecas + ANSI_RESET);
 			}
 		}
 		System.out.print(" ");
 	}
-	
-	private static void imprimirPecaCapturada (List <PecaXadrez> capturar) {
-		List <PecaXadrez> pecaBranca = capturar.stream().filter(x -> x.getCor() == Cor.WHITE).collect(Collectors.toList());
-		List <PecaXadrez> pecaPreta = capturar.stream().filter(x -> x.getCor() == Cor.BLACK).collect(Collectors.toList());
+
+	private static void imprimirPecaCapturada(List<PecaXadrez> capturar) {
+		List<PecaXadrez> pecaBranca = capturar.stream().filter(x -> x.getCor() == Cor.WHITE)
+				.collect(Collectors.toList());
+		List<PecaXadrez> pecaPreta = capturar.stream().filter(x -> x.getCor() == Cor.BLACK)
+				.collect(Collectors.toList());
 		System.out.println("Peças capturada: ");
 		System.out.print("Brancas: ");
 		System.out.print(ANSI_WHITE);
