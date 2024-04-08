@@ -10,6 +10,7 @@ import tabuleiro.Tabuleiro;
 import xadrez.pecas.Bispo;
 import xadrez.pecas.Cavalo;
 import xadrez.pecas.Peao;
+import xadrez.pecas.Rainha;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
 
@@ -78,7 +79,7 @@ public class PartidaXadrez {
 
 		if (testandoCheckMate(oponente(jogadorAtual))) {
 			checkMate = true;
-		} 
+		}
 		else {
 			trocarTurno();
 		}
@@ -101,7 +102,7 @@ public class PartidaXadrez {
 	}
 
 	private void desfazerMovimentos(Posicao origem, Posicao alvo, Pecas pecasCapturada) {
-		PecaXadrez p =(PecaXadrez) tabuleiro.removerPeca(alvo);
+		PecaXadrez p = (PecaXadrez) tabuleiro.removerPeca(alvo);
 		p.diminuirContagemMovimento();
 		tabuleiro.lugarPeca(p, origem);
 
@@ -169,7 +170,8 @@ public class PartidaXadrez {
 		if (!testandoCheck(cor)) {
 			return false;
 		}
-		List<Pecas> list = pecasNoTabuleiro.stream().filter(x -> ((PecaXadrez) x).getCor() == cor).collect(Collectors.toList());
+		List<Pecas> list = pecasNoTabuleiro.stream().filter(x -> ((PecaXadrez) x).getCor() == cor)
+				.collect(Collectors.toList());
 
 		for (Pecas p : list) {
 			boolean[][] mat = p.movimentosPossiveis();
@@ -203,6 +205,7 @@ public class PartidaXadrez {
 		novaPeca('f', 1, new Bispo(tabuleiro, Cor.WHITE));
 		novaPeca('b', 1, new Cavalo(tabuleiro, Cor.WHITE));
 		novaPeca('g', 1, new Cavalo(tabuleiro, Cor.WHITE));
+		novaPeca('d', 1, new Rainha(tabuleiro, Cor.WHITE));
 		novaPeca('e', 1, new Rei(tabuleiro, Cor.WHITE));
 		novaPeca('a', 2, new Peao(tabuleiro, Cor.WHITE));
 		novaPeca('b', 2, new Peao(tabuleiro, Cor.WHITE));
@@ -212,13 +215,14 @@ public class PartidaXadrez {
 		novaPeca('f', 2, new Peao(tabuleiro, Cor.WHITE));
 		novaPeca('g', 2, new Peao(tabuleiro, Cor.WHITE));
 		novaPeca('h', 2, new Peao(tabuleiro, Cor.WHITE));
-		
+
 		novaPeca('a', 8, new Torre(tabuleiro, Cor.BLACK));
 		novaPeca('h', 8, new Torre(tabuleiro, Cor.BLACK));
 		novaPeca('c', 8, new Bispo(tabuleiro, Cor.BLACK));
 		novaPeca('f', 8, new Bispo(tabuleiro, Cor.BLACK));
 		novaPeca('b', 8, new Cavalo(tabuleiro, Cor.BLACK));
 		novaPeca('g', 8, new Cavalo(tabuleiro, Cor.BLACK));
+		novaPeca('d', 8, new Rainha(tabuleiro, Cor.BLACK));
 		novaPeca('e', 8, new Rei(tabuleiro, Cor.BLACK));
 		novaPeca('a', 7, new Peao(tabuleiro, Cor.BLACK));
 		novaPeca('b', 7, new Peao(tabuleiro, Cor.BLACK));
