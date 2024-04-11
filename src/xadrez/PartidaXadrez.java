@@ -1,6 +1,5 @@
 package xadrez;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -124,12 +123,13 @@ public class PartidaXadrez {
 			throw new IllegalStateException("Não há peça para ser promovida");
 		}
 		if (!tipo.equals("B") && !tipo.equals("C") && tipo.equals("T") && tipo.equals("Q")) {
-			throw new InvalidParameterException("Tipo de promoção inválida");
+			return promocao;
 		}
 
 		Posicao pos = promocao.getPosicaoXadrez().toPosicao();
 		Pecas p = tabuleiro.removerPeca(pos);
 		pecasNoTabuleiro.remove(p);
+		
 		PecaXadrez newPeca = newPeca(tipo, promocao.getCor());
 		tabuleiro.lugarPeca(newPeca, pos);
 		pecasNoTabuleiro.add(newPeca);

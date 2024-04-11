@@ -13,14 +13,14 @@ import xadrez.PosicaoXadrez;
 
 public class Programa {
 
-	public static void main(String[] args)  {
+	public static void main(String[] args) {
 
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 
 		PartidaXadrez partidaXadrez = new PartidaXadrez();
-		List <PecaXadrez> capturar = new ArrayList<>();
-		
+		List<PecaXadrez> capturar = new ArrayList<>();
+
 		while (!partidaXadrez.getCheckMate()) {
 			try {
 				UI.limparTela();
@@ -29,7 +29,7 @@ public class Programa {
 				System.out.print("Origem: ");
 				PosicaoXadrez origem = UI.lerPosicaoXadrez(sc);
 
-				boolean[][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(origem); 
+				boolean[][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(origem);
 				UI.limparTela();
 				UI.imprimirTabuleiro(partidaXadrez.getPecas(), movimentosPossiveis);
 
@@ -38,14 +38,19 @@ public class Programa {
 				PosicaoXadrez alvo = UI.lerPosicaoXadrez(sc);
 
 				PecaXadrez capturarPeca = partidaXadrez.executarMovimentoXadrez(origem, alvo);
-				
+
 				if (capturarPeca != null) {
 					capturar.add(capturarPeca);
 				}
-				
+
 				if (partidaXadrez.getPromocao() != null) {
 					System.out.print("Informe a peça a ser promovida (B/C/Q/T) ");
-					String tipo = sc.nextLine();
+					String tipo = sc.nextLine().toUpperCase();
+					while (!tipo.equals("B") && !tipo.equals("C") && tipo.equals("T") && tipo.equals("Q")) {
+						System.out.println("Valor inválido! Digite novamente. ");
+						System.out.print("Informe a peça a ser promovida (B/C/Q/T) ");
+						tipo = sc.nextLine().toUpperCase();
+					}
 					partidaXadrez.substituirPecaPromovida(tipo);
 				}
 			} 
@@ -59,7 +64,7 @@ public class Programa {
 			}
 
 		}
-		
+
 		UI.limparTela();
 		UI.imprimirPartida(partidaXadrez, capturar);
 
