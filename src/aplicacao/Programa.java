@@ -59,6 +59,7 @@ public class Programa {
 			}
 
 		}
+		
 		UI.limparTela();
 		UI.imprimirPartida(partidaXadrez, capturar);
 
