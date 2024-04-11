@@ -38,8 +38,15 @@ public class Programa {
 				PosicaoXadrez alvo = UI.lerPosicaoXadrez(sc);
 
 				PecaXadrez capturarPeca = partidaXadrez.executarMovimentoXadrez(origem, alvo);
+				
 				if (capturarPeca != null) {
 					capturar.add(capturarPeca);
+				}
+				
+				if (partidaXadrez.getPromocao() != null) {
+					System.out.print("Informe a peça a ser promovida (B/C/Q/T) ");
+					String tipo = sc.nextLine();
+					partidaXadrez.substituirPecaPromovida(tipo);
 				}
 			} 
 			catch (ExcecaoXadrez e) {
